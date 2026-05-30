@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proyecto_Veterinaria.Formularios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Proyecto_Veterinaria
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAdminClient());
+            Application.Run(new frmPrincipal());
         }
     }
 }

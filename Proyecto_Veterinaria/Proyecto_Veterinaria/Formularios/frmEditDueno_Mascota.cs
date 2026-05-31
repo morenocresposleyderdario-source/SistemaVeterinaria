@@ -26,7 +26,7 @@ namespace Proyecto_Veterinaria.Formularios
 
         private void frmEditDueno_Mascota_Load(object sender, EventArgs e)
         {
-
+            LlenarComboDuenos();
         }
         public bool ValidarDatos()
         {
@@ -186,33 +186,37 @@ namespace Proyecto_Veterinaria.Formularios
                     MessageBox.Show("Debe seleccionar un dueño para la mascota.");
                     return;
                 }
+                if (listaMascotasTemporales.Count == 0)
+                {
+                    MessageBox.Show("El ListBox está vacío. Agregue al menos una mascota antes de ingresar.");
+                    return;
+                }
 
                 // 2. Recuperar el objeto Dueño real usando la misma posición del ComboBox
                 duenoSeleccionado = TListas.GetDueno(comboBox3.SelectedIndex);
 
-                // 3. Capturar datos de la mascota
-                string codMascota = textBox16.Text;
-                string nomMascota = textBox15.Text;
-                string especieMascota = comboBox2.SelectedItem?.ToString() ?? "No especificada";
-                string razaMascota = textBox13.Text;
-                int edadMascota = string.IsNullOrWhiteSpace(textBox12.Text) ? 0 : int.Parse(textBox12.Text);
-                DateTime fechanacMascota = dateTimePicker2.Value;
-
-                // 4. Crear objeto Mascota asignándole el dueño recuperado
-                Mascota nuevaMascota = new Mascota(codMascota, nomMascota, especieMascota, razaMascota, fechanacMascota, edadMascota, duenoSeleccionado);
-
-                // 5. Vincular internamente en memoria (Relación bidireccional)
-                duenoSeleccionado.agregarMascota(nuevaMascota);
-
-                // 6. Registrar en la lista global de Mascotas
-                if (!TListas.Lista_Mascotas.Any(m => m.Codigo_Mascota == nuevaMascota.Codigo_Mascota))
+                foreach (Mascota mascotaTemp in listaMascotasTemporales)
                 {
-                    TListas.InsertMascota(nuevaMascota);
+                    // Asignamos el dueño real que estaba pendiente
+                    mascotaTemp.Dueno = duenoSeleccionado;
+
+                    // Vinculación bidireccional en las listas del objeto
+                    duenoSeleccionado.agregarMascota(mascotaTemp);
+
+                    // Insertar en la lista global estática para el DataGridView
+                    if (!TListas.Lista_Mascotas.Any(m => m.Codigo_Mascota == mascotaTemp.Codigo_Mascota))
+                    {
+                        TListas.InsertMascota(mascotaTemp);
+                    }
                 }
 
-                MessageBox.Show("Mascota registrada y vinculada con éxito.");
+                MessageBox.Show($"Se han registrado exitosamente {listaMascotasTemporales.Count} mascota(s).");
 
-                // Cambiar el resultado a OK para que los frmAdmin sepan que deben refrescar sus tablas
+                // Limpiar contenedores temporales
+                listaMascotasTemporales.Clear();
+                listBox1.Items.Clear();
+
+                // Cerramos con éxito
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

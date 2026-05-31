@@ -33,6 +33,9 @@
             this.guiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaMedicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminDueñoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminMascotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminMedicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +54,10 @@
             // 
             // gestionToolStripMenuItem
             // 
+            this.gestionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adminDueñoToolStripMenuItem,
+            this.adminMascotaToolStripMenuItem,
+            this.adminMedicoToolStripMenuItem});
             this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
             this.gestionToolStripMenuItem.Size = new System.Drawing.Size(73, 26);
             this.gestionToolStripMenuItem.Text = "Gestion";
@@ -66,7 +73,7 @@
             // consultaMedicaToolStripMenuItem
             // 
             this.consultaMedicaToolStripMenuItem.Name = "consultaMedicaToolStripMenuItem";
-            this.consultaMedicaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.consultaMedicaToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.consultaMedicaToolStripMenuItem.Text = "Consulta Medica";
             this.consultaMedicaToolStripMenuItem.Click += new System.EventHandler(this.consultaMedicaToolStripMenuItem_Click);
             // 
@@ -75,6 +82,27 @@
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 26);
             this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // adminDueñoToolStripMenuItem
+            // 
+            this.adminDueñoToolStripMenuItem.Name = "adminDueñoToolStripMenuItem";
+            this.adminDueñoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminDueñoToolStripMenuItem.Text = "AdminDueño";
+            this.adminDueñoToolStripMenuItem.Click += new System.EventHandler(this.adminDueñoToolStripMenuItem_Click);
+            // 
+            // adminMascotaToolStripMenuItem
+            // 
+            this.adminMascotaToolStripMenuItem.Name = "adminMascotaToolStripMenuItem";
+            this.adminMascotaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminMascotaToolStripMenuItem.Text = "AdminMascota";
+            this.adminMascotaToolStripMenuItem.Click += new System.EventHandler(this.adminMascotaToolStripMenuItem_Click);
+            // 
+            // adminMedicoToolStripMenuItem
+            // 
+            this.adminMedicoToolStripMenuItem.Name = "adminMedicoToolStripMenuItem";
+            this.adminMedicoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminMedicoToolStripMenuItem.Text = "AdminMedico";
+            this.adminMedicoToolStripMenuItem.Click += new System.EventHandler(this.adminMedicoToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -85,6 +113,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmPrincipal";
             this.Text = "frmPrincipal";
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -99,5 +128,8 @@
         private System.Windows.Forms.ToolStripMenuItem guiaConsultaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaMedicaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminDueñoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminMascotaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminMedicoToolStripMenuItem;
     }
 }

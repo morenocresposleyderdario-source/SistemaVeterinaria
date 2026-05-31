@@ -59,5 +59,9 @@ namespace Proyecto_Veterinaria.Entidades
         {
             return $"Código: {Codigo}\nCédula: {Cedula}\nNombre: {Nombre}\nApellido: {Apellido}\nSexo: {Sexo}\nEdad: {Edad}\nFecha de Nacimiento: {FechaNacimiento}\nDirección: {Direccion}\nTeléfono: {Telefono}\nCorreo: {Correo}";
         }
+        public override string ToString()
+        {
+            return $"{this.Nombre} {this.Apellido}";
+        }
     }
 }

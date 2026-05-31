@@ -1,0 +1,27 @@
+name: Build Windows Forms app
+
+on:
+  push:
+    branches: [ "main", "test-pipeline" ]
+  pull_request:
+    branches: [ "main", "test-pipeline" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar NuGet
+      uses: NuGet/setup-nuget@v2
+
+    - name: Configurar MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Restaurar paquetes NuGet
+      run: nuget restore Proyecto_Veterinaria/Proyecto_Veterinaria.sln
+
+    - name: Compilar proyecto
+      run: msbuild Proyecto_Veterinaria/Proyecto_Veterinaria.sln /p:Configuration=Release /p:Platform="Any CPU"

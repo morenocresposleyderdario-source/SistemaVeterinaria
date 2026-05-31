@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace Proyecto_Veterinaria.Formularios
 {
-    public partial class frmPrincipal : Form
+    public partial class frmEditGuiaConsulta : Form
     {
-        public frmPrincipal()
+        public frmEditGuiaConsulta()
         {
             InitializeComponent();
-        }
-
-        private void consultaMedicaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmEditGuiaConsulta frm = new frmEditGuiaConsulta();
-            frm.ShowDialog();
         }
     }
 }

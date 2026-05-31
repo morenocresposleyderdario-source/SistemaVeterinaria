@@ -52,29 +52,32 @@ namespace Proyecto_Veterinaria.Formularios
 
         public void Eliminar()
         {
-            try
+            if (dataGridView1.CurrentRow == null)
             {
-                if (dataGridView1.CurrentRow != null)
-                {
-                    var res = MessageBox.Show("¿Desea eliminar la mascota seleccionada?", "Eliminar Mascota", MessageBoxButtons.YesNo);
-                    if (res == DialogResult.Yes)
-                    {
-                        Mascota obj = dataGridView1.CurrentRow.DataBoundItem as Mascota;
-                        int pos = TListas.BuscarMascota(obj.Codigo_Mascota);
-                        TListas.DeleteMascota(pos);
-
-                        MessageBox.Show("Mascota eliminada de los registros");
-                        MostrarDatos();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione la fila a Eliminar.");
-                }
+                MessageBox.Show("Seleccione una mascota para eliminar.");
+                return;
             }
-            catch (Exception ex)
+
+            string codMascota = dataGridView1.CurrentRow.Cells["Codigo_Mascota"].Value.ToString();
+            Mascota mascotaAEliminar = TListas.Lista_Mascotas.FirstOrDefault(m => m.Codigo_Mascota == codMascota);
+
+            if (mascotaAEliminar != null)
             {
-                MessageBox.Show("Error al eliminar: " + ex.Message);
+                var confirmacion = MessageBox.Show($"¿Desea eliminar a la mascota {mascotaAEliminar.Nombre}?", "Confirmar", MessageBoxButtons.YesNo);
+                if (confirmacion == DialogResult.Yes)
+                {
+                    // 1. Si la mascota tiene un dueño asignado, la removemos de SU lista familiar interna
+                    if (mascotaAEliminar.Dueno != null && mascotaAEliminar.Dueno.Mascotas != null)
+                    {
+                        mascotaAEliminar.Dueno.Mascotas.Remove(mascotaAEliminar);
+                    }
+
+                    // 2. La eliminamos de la lista GLOBAL de la veterinaria
+                    TListas.Lista_Mascotas.Remove(mascotaAEliminar);
+
+                    MostrarDatos();
+                    MessageBox.Show("Mascota eliminada con éxito.");
+                }
             }
         }
 

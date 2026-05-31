@@ -57,6 +57,12 @@
     <Compile Include="Entidades\GuiaConsulta.cs" />
     <Compile Include="Entidades\Mascota.cs" />
     <Compile Include="Entidades\Medico.cs" />
+    <Compile Include="Formularios\frmConsultasLinq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmConsultasLinq.Designer.cs">
+      <DependentUpon>frmConsultasLinq.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\ReportePDF.cs" />
     <Compile Include="Formularios\frmAdminClient.cs">
       <SubType>Form</SubType>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmAdminMedico.resx">
       <DependentUpon>frmAdminMedico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmConsultasLinq.resx">
+      <DependentUpon>frmConsultasLinq.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\frmEditDueno_Mascota.resx">
       <DependentUpon>frmEditDueno_Mascota.cs</DependentUpon>

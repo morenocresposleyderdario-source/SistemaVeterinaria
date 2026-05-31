@@ -21,7 +21,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Restaurar paquetes NuGet
-      run: nuget restore Proyecto_Veterinaria/Proyecto_Veterinaria.sln
+      run: nuget restore Proyecto_Veterinaria.sln
 
     - name: Compilar proyecto
-      run: msbuild Proyecto_Veterinaria/Proyecto_Veterinaria.sln /p:Configuration=Release /p:Platform="Any CPU"
+      run: msbuild Proyecto_Veterinaria.sln /p:Configuration=Release /p:Platform="Any CPU"

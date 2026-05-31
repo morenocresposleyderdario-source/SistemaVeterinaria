@@ -33,10 +33,11 @@
             this.adminDueñoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminMascotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminMedicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminGuiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaMedicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminGuiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultasLinqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,23 +68,30 @@
             // adminDueñoToolStripMenuItem
             // 
             this.adminDueñoToolStripMenuItem.Name = "adminDueñoToolStripMenuItem";
-            this.adminDueñoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminDueñoToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.adminDueñoToolStripMenuItem.Text = "AdminDueño";
             this.adminDueñoToolStripMenuItem.Click += new System.EventHandler(this.adminDueñoToolStripMenuItem_Click);
             // 
             // adminMascotaToolStripMenuItem
             // 
             this.adminMascotaToolStripMenuItem.Name = "adminMascotaToolStripMenuItem";
-            this.adminMascotaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminMascotaToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.adminMascotaToolStripMenuItem.Text = "AdminMascota";
             this.adminMascotaToolStripMenuItem.Click += new System.EventHandler(this.adminMascotaToolStripMenuItem_Click);
             // 
             // adminMedicoToolStripMenuItem
             // 
             this.adminMedicoToolStripMenuItem.Name = "adminMedicoToolStripMenuItem";
-            this.adminMedicoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminMedicoToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
             this.adminMedicoToolStripMenuItem.Text = "AdminMedico";
             this.adminMedicoToolStripMenuItem.Click += new System.EventHandler(this.adminMedicoToolStripMenuItem_Click);
+            // 
+            // adminGuiaConsultaToolStripMenuItem
+            // 
+            this.adminGuiaConsultaToolStripMenuItem.Name = "adminGuiaConsultaToolStripMenuItem";
+            this.adminGuiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.adminGuiaConsultaToolStripMenuItem.Text = "AdminGuiaConsulta";
+            this.adminGuiaConsultaToolStripMenuItem.Click += new System.EventHandler(this.adminGuiaConsultaToolStripMenuItem_Click);
             // 
             // guiaConsultaToolStripMenuItem
             // 
@@ -102,16 +110,18 @@
             // 
             // reportesToolStripMenuItem
             // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.consultasLinqToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
-            // adminGuiaConsultaToolStripMenuItem
+            // consultasLinqToolStripMenuItem
             // 
-            this.adminGuiaConsultaToolStripMenuItem.Name = "adminGuiaConsultaToolStripMenuItem";
-            this.adminGuiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.adminGuiaConsultaToolStripMenuItem.Text = "AdminGuiaConsulta";
-            this.adminGuiaConsultaToolStripMenuItem.Click += new System.EventHandler(this.adminGuiaConsultaToolStripMenuItem_Click);
+            this.consultasLinqToolStripMenuItem.Name = "consultasLinqToolStripMenuItem";
+            this.consultasLinqToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.consultasLinqToolStripMenuItem.Text = "Consultas Linq";
+            this.consultasLinqToolStripMenuItem.Click += new System.EventHandler(this.consultasLinqToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -141,5 +151,6 @@
         private System.Windows.Forms.ToolStripMenuItem adminMascotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminMedicoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminGuiaConsultaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultasLinqToolStripMenuItem;
     }
 }

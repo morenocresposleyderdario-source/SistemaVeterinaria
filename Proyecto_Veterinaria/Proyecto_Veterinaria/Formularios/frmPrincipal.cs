@@ -59,6 +59,8 @@ namespace Proyecto_Veterinaria.Formularios
 
                 Medico med1 = new Medico("MED01", "0706924271", "Sleyder", "Moreno Crespo", "Veterinario", "0968896092", "sleyder.moreno@hotmail.com", "Lic_01");
 
+                GuiaConsulta gc1 = new GuiaConsulta(01, new DateTime(2024, 07, 20), m1, d1, "Consulta general", 35, 1.35, 60, 25, 1.20, "Perro en estabales condiciones", "Sacar a pasear al canino");
+
                 TListas.InsertMedico(med1);
 
                 TListas.InsertMascota(m1);
@@ -69,6 +71,12 @@ namespace Proyecto_Veterinaria.Formularios
         private void adminGuiaConsultaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAdminGuiaConsulta frm = new frmAdminGuiaConsulta();
+            frm.ShowDialog();
+        }
+
+        private void consultasLinqToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultasLinq frm = new frmConsultasLinq();
             frm.ShowDialog();
         }
     }

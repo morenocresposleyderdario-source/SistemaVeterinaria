@@ -19,6 +19,11 @@ namespace Proyecto_Veterinaria.Formularios
             InitializeComponent();
         }
 
+        private void consultaMedicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmEditGuiaConsulta frm = new frmEditGuiaConsulta();
+            frm.ShowDialog();
+        }
         private void adminDueñoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAdminClient frm = new frmAdminClient();

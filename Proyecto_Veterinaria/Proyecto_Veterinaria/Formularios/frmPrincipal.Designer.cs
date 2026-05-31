@@ -48,7 +48,7 @@
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -59,7 +59,7 @@
             this.adminMascotaToolStripMenuItem,
             this.adminMedicoToolStripMenuItem});
             this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
-            this.gestionToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.gestionToolStripMenuItem.Size = new System.Drawing.Size(73, 26);
             this.gestionToolStripMenuItem.Text = "Gestion";
             // 
             // guiaConsultaToolStripMenuItem
@@ -67,7 +67,7 @@
             this.guiaConsultaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultaMedicaToolStripMenuItem});
             this.guiaConsultaToolStripMenuItem.Name = "guiaConsultaToolStripMenuItem";
-            this.guiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
+            this.guiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
             this.guiaConsultaToolStripMenuItem.Text = "Guia Consulta";
             // 
             // consultaMedicaToolStripMenuItem
@@ -75,11 +75,12 @@
             this.consultaMedicaToolStripMenuItem.Name = "consultaMedicaToolStripMenuItem";
             this.consultaMedicaToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.consultaMedicaToolStripMenuItem.Text = "Consulta Medica";
+            this.consultaMedicaToolStripMenuItem.Click += new System.EventHandler(this.consultaMedicaToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 26);
             this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // adminDueñoToolStripMenuItem

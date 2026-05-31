@@ -109,5 +109,26 @@ namespace Proyecto_Veterinaria.Formularios
         {
             Eliminar();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un médico de la lista.");
+                return;
+            }
+
+            string cedulaSeleccionada = dataGridView1.CurrentRow.Cells["Cedula"].Value.ToString();
+            Medico medicoAEditar = TListas.Lista_Medicos.FirstOrDefault(m => m.Cedula == cedulaSeleccionada);
+
+            if (medicoAEditar != null)
+            {
+                frmEditMedico frmEditar = new frmEditMedico(medicoAEditar);
+                if (frmEditar.ShowDialog() == DialogResult.OK)
+                {
+                    MostrarDatos();
+                }
+            }
+        }
     }
 }

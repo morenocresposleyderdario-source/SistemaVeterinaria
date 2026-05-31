@@ -87,5 +87,26 @@ namespace Proyecto_Veterinaria.Formularios
         {
             Eliminar();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione una mascota de la lista.");
+                return;
+            }
+
+            string codigoMascotaSeleccionada = dataGridView1.CurrentRow.Cells["Codigo_Mascota"].Value.ToString();
+            Mascota mascotaAEditar = TListas.Lista_Mascotas.FirstOrDefault(m => m.Codigo_Mascota == codigoMascotaSeleccionada);
+
+            if (mascotaAEditar != null)
+            {
+                frmEditDueno_Mascota frmEditar = new frmEditDueno_Mascota(mascotaAEditar);
+                if (frmEditar.ShowDialog() == DialogResult.OK)
+                {
+                    MostrarDatos();
+                }
+            }
+        }
     }
 }

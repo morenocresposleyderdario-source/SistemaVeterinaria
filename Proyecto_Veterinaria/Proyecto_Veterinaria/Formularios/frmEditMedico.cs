@@ -19,10 +19,30 @@ namespace Proyecto_Veterinaria.Formularios
         {
             InitializeComponent();
         }
+        private Medico medicoExistente = null;
 
+        public frmEditMedico(Medico medico)
+        {
+            InitializeComponent();
+            this.medicoExistente = medico;
+        }
         private void frmEditMedico_Load(object sender, EventArgs e)
         {
+            if (medicoExistente != null)
+            {
+                textBox1.Text = medicoExistente.Id_Medico;
+                textBox2.Text = medicoExistente.Cedula;
+                textBox2.Enabled = false;
 
+                textBox3.Text = medicoExistente.Nombre;
+                textBox4.Text = medicoExistente.Apellido;
+                textBox5.Text = medicoExistente.Especialidad; // Si manejas especialidad
+                textBox6.Text = medicoExistente.Telefono;
+                textBox7.Text = medicoExistente.Correo;
+                textBox8.Text = medicoExistente.Numero_Licencia;
+
+                button1.Text = "Actualizar Cambios";
+            }
         }
         public bool ValidarDatos()
         {
@@ -72,14 +92,34 @@ namespace Proyecto_Veterinaria.Formularios
 
                 // Crear objeto Medico
                 Medico nuevoMedico = new Medico(codMedico, cedMedico, nomMedico, apeMedico, especialidadMedico, telefonoMedico, correoMedico, numeroLicenciaMedico);
-
-                // Insertar en la lista estática si no existe
-                if (!TListas.Lista_Medicos.Any(d => d.Id_Medico == nuevoMedico.Id_Medico))
+                if(medicoExistente == null)
                 {
-                    TListas.InsertMedico(nuevoMedico);
+                    if (!TListas.Lista_Medicos.Any(d => d.Id_Medico == nuevoMedico.Id_Medico))
+                    {
+                        TListas.InsertMedico(nuevoMedico);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya existe un medico con el mismo código. Por favor, ingrese un código diferente.");
+                        return;
+                    }
+                }
+                else
+                {
+                    int indice = TListas.Lista_Medicos.FindIndex(m => m.Id_Medico == medicoExistente.Id_Medico);
+                    if (indice != -1)
+                    {
+                        // Reemplazamos el objeto antiguo con el nuevo objeto modificado
+                        TListas.Lista_Medicos[indice] = nuevoMedico;
+                        MessageBox.Show("Datos del médico actualizados con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró el registro original para actualizar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
 
-                MessageBox.Show("Medico registrado con éxito.");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

@@ -287,5 +287,31 @@ namespace Proyecto_Veterinaria.Formularios
                 MessageBox.Show("Seleccione una mascota de la lista para eliminarla.");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            comboBox1.SelectedIndex = -1;
+            dateTimePicker1.Value = DateTime.Now;
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            textBox8.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox16.Clear();
+            textBox15.Clear();
+            textBox13.Clear();
+            textBox12.Clear();
+            comboBox2.SelectedIndex = -1;
+            dateTimePicker2.Value = DateTime.Now;
+            comboBox3.SelectedIndex = -1;
+            listBox1.Items.Clear();
+        }
     }
  }

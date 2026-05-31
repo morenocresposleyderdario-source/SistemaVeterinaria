@@ -35,6 +35,24 @@ namespace Proyecto_Veterinaria.Formularios
             textBox9.Clear();
             textBox8.Clear();
         }
+        public void LlenarComboMedicos()
+        {
+            // 1. Limpiamos los ítems actuales por si acaso para evitar duplicados
+            comboBox1.Items.Clear();
+
+            // 2. Recorremos la lista estática global de médicos
+            foreach (Medico med in TListas.Lista_Medicos)
+            {
+                // Al agregar el objeto 'med' completo, el combo usará el ToString() que configuramos en el Paso 1
+                comboBox1.Items.Add(med);
+            }
+
+            // 3. Opcional: Si hay médicos registrados, seleccionamos el primero por defecto
+            if (comboBox1.Items.Count > 0)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -96,6 +114,101 @@ namespace Proyecto_Veterinaria.Formularios
             catch (Exception ex)
             {
                 MessageBox.Show("Error al procesar la búsqueda: " + ex.Message);
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void frmEditGuiaConsulta_Load(object sender, EventArgs e)
+        {
+            LlenarComboMedicos();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. VALIDACIONES BÁSICAS DE TEXTO vacío
+                if (string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    MessageBox.Show("Por favor, ingrese el número de consulta.");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(textBox3.Text) || string.IsNullOrWhiteSpace(textBox12.Text))
+                {
+                    MessageBox.Show("Debe buscar y cargar un Dueño y una Mascota antes de guardar.");
+                    return;
+                }
+
+                if (comboBox1.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Debe seleccionar un Médico encargado.");
+                    return;
+                }
+
+                // 2. RECUPERAR LOS OBJETOS REALES EN MEMORIA
+                Dueno duenoConsulta = TListas.Lista_Duenos.FirstOrDefault(d => d.Cedula == textBox3.Text);
+                Mascota mascotaConsulta = TListas.Lista_Mascotas.FirstOrDefault(m => m.Nombre == textBox12.Text && m.Dueno.Codigo == duenoConsulta.Codigo);
+                Medico medicoConsulta = comboBox1.SelectedItem as Medico;
+
+                // =========================================================================
+                // 3. CAPTURAR DATOS NUMÉRICOS DE FORMA SEGURA (Evita el error de formato)
+                // =========================================================================
+
+                // Conversión segura del Número de Consulta
+                int idConsulta;
+                if (!int.TryParse(textBox1.Text.Trim(), out idConsulta))
+                {
+                    MessageBox.Show("El Número de Consulta debe ser un número entero válido (ej: 1, 2, 3...).");
+                    return;
+                }
+
+                DateTime fechaConsulta = dateTimePicker1.Value;
+                string motivo = textBox17.Text;
+                string diagnostico = textBox18.Text;
+                string tratamiento = textBox19.Text;
+
+                // Variables auxiliares para intentar la conversión sin romper el sistema
+                int temperatura;
+                double peso, frecCardiaca, frecRespiratoria, estatura;
+
+                // Si el usuario no escribe nada o pone letras, se asigna 0 automáticamente
+                int.TryParse(textBox16.Text.Trim(), out temperatura);
+                double.TryParse(textBox20.Text.Trim().Replace(',', '.'), out peso); // Reemplaza coma por punto por si acaso
+                double.TryParse(textBox15.Text.Trim(), out frecCardiaca);
+                double.TryParse(textBox14.Text.Trim(), out frecRespiratoria);
+                double.TryParse(textBox13.Text.Trim(), out estatura);
+
+                // =========================================================================
+                // 4. CREAR INSTANCIA DE GUIA CONSULTA
+                // =========================================================================
+                GuiaConsulta nuevaConsulta = new GuiaConsulta(
+                    idConsulta, fechaConsulta, mascotaConsulta, duenoConsulta, motivo,
+                    temperatura, peso, frecCardiaca, frecRespiratoria, estatura, diagnostico, tratamiento
+                );
+
+                // 5. GUARDAR EN LA LISTA GLOBAL Y GENERAR EL REPORTE
+                if (!TListas.Lista_GuiaConsulta.Any(c => c.IdConsulta == nuevaConsulta.IdConsulta))
+                {
+                    TListas.Lista_GuiaConsulta.Add(nuevaConsulta);
+
+                    // Generamos el PDF usando la entidad externa
+                    ReportePDF.GenerarComprobanteConsulta(nuevaConsulta, medicoConsulta);
+
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ya existe una consulta registrada con ese número de consulta.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error inesperado al guardar la consulta: " + ex.Message);
             }
         }
     }

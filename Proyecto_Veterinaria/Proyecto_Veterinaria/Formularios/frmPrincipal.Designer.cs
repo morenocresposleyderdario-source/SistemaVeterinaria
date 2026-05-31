@@ -30,12 +30,13 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.guiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultaMedicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminDueñoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminMascotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adminMedicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.guiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaMedicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminGuiaConsultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -57,31 +58,11 @@
             this.gestionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adminDueñoToolStripMenuItem,
             this.adminMascotaToolStripMenuItem,
-            this.adminMedicoToolStripMenuItem});
+            this.adminMedicoToolStripMenuItem,
+            this.adminGuiaConsultaToolStripMenuItem});
             this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
-            this.gestionToolStripMenuItem.Size = new System.Drawing.Size(73, 26);
+            this.gestionToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
             this.gestionToolStripMenuItem.Text = "Gestion";
-            // 
-            // guiaConsultaToolStripMenuItem
-            // 
-            this.guiaConsultaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.consultaMedicaToolStripMenuItem});
-            this.guiaConsultaToolStripMenuItem.Name = "guiaConsultaToolStripMenuItem";
-            this.guiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
-            this.guiaConsultaToolStripMenuItem.Text = "Guia Consulta";
-            // 
-            // consultaMedicaToolStripMenuItem
-            // 
-            this.consultaMedicaToolStripMenuItem.Name = "consultaMedicaToolStripMenuItem";
-            this.consultaMedicaToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.consultaMedicaToolStripMenuItem.Text = "Consulta Medica";
-            this.consultaMedicaToolStripMenuItem.Click += new System.EventHandler(this.consultaMedicaToolStripMenuItem_Click);
-            // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 26);
-            this.reportesToolStripMenuItem.Text = "Reportes";
             // 
             // adminDueñoToolStripMenuItem
             // 
@@ -103,6 +84,34 @@
             this.adminMedicoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.adminMedicoToolStripMenuItem.Text = "AdminMedico";
             this.adminMedicoToolStripMenuItem.Click += new System.EventHandler(this.adminMedicoToolStripMenuItem_Click);
+            // 
+            // guiaConsultaToolStripMenuItem
+            // 
+            this.guiaConsultaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.consultaMedicaToolStripMenuItem});
+            this.guiaConsultaToolStripMenuItem.Name = "guiaConsultaToolStripMenuItem";
+            this.guiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(114, 24);
+            this.guiaConsultaToolStripMenuItem.Text = "Guia Consulta";
+            // 
+            // consultaMedicaToolStripMenuItem
+            // 
+            this.consultaMedicaToolStripMenuItem.Name = "consultaMedicaToolStripMenuItem";
+            this.consultaMedicaToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.consultaMedicaToolStripMenuItem.Text = "Consulta Medica";
+            this.consultaMedicaToolStripMenuItem.Click += new System.EventHandler(this.consultaMedicaToolStripMenuItem_Click);
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // adminGuiaConsultaToolStripMenuItem
+            // 
+            this.adminGuiaConsultaToolStripMenuItem.Name = "adminGuiaConsultaToolStripMenuItem";
+            this.adminGuiaConsultaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adminGuiaConsultaToolStripMenuItem.Text = "AdminGuiaConsulta";
+            this.adminGuiaConsultaToolStripMenuItem.Click += new System.EventHandler(this.adminGuiaConsultaToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -131,5 +140,6 @@
         private System.Windows.Forms.ToolStripMenuItem adminDueñoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminMascotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminMedicoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminGuiaConsultaToolStripMenuItem;
     }
 }

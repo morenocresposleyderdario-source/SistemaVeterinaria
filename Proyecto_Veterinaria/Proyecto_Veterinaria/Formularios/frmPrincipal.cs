@@ -57,9 +57,19 @@ namespace Proyecto_Veterinaria.Formularios
                 Mascota m1 = new Mascota("M01", "Lucas", "Perro", "Golden", new DateTime(2022, 01, 10), 4, d1);
                 Mascota m2 = new Mascota("M02", "Michi", "Gato", "Siamés", new DateTime(2024, 06, 15), 2, d2);
 
+                Medico med1 = new Medico("MED01", "0706924271", "Sleyder", "Moreno Crespo", "Veterinario", "0968896092", "sleyder.moreno@hotmail.com", "Lic_01");
+
+                TListas.InsertMedico(med1);
+
                 TListas.InsertMascota(m1);
                 TListas.InsertMascota(m2);
             }
+        }
+
+        private void adminGuiaConsultaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAdminGuiaConsulta frm = new frmAdminGuiaConsulta();
+            frm.ShowDialog();
         }
     }
 }

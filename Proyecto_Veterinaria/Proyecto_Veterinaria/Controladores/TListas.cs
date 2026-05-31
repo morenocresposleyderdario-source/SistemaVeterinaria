@@ -13,7 +13,7 @@ namespace Proyecto_Veterinaria.Controladores
         public static List<Dueno> Lista_Duenos = new List<Dueno>();
         public static List<Mascota> Lista_Mascotas = new List<Mascota>();
         public static List<Medico> Lista_Medicos = new List<Medico>();
-
+        public static List<GuiaConsulta> Lista_GuiaConsulta = new List<GuiaConsulta>();
         // ════════════════════════════════════════════════════════
         //  CRUD — Duenos
         // ════════════════════════════════════════════════════════

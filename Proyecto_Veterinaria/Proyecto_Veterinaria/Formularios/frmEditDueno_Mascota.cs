@@ -24,9 +24,88 @@ namespace Proyecto_Veterinaria.Formularios
         private Dueno duenoSeleccionado;
         private List<Mascota> listaMascotasTemporales = new List<Mascota>();
 
+        private Dueno duenoexistente = null;
+        private Mascota mascotaexistente = null;
+        public frmEditDueno_Mascota(Dueno dueno)
+        {
+            InitializeComponent();
+            this.duenoexistente = dueno;
+        }
+
+        // Constructor 3: Cuando se modifica desde el Administrador de Mascotas
+        public frmEditDueno_Mascota(Mascota mascota)
+        {
+            InitializeComponent();
+            this.mascotaexistente = mascota;
+            // Si viene una mascota, automáticamente apuntamos también a su dueño original
+            this.duenoexistente = mascota.Dueno;
+        }
+
         private void frmEditDueno_Mascota_Load(object sender, EventArgs e)
         {
             LlenarComboDuenos();
+            if (duenoexistente != null)
+            {
+                // 1. Cargar los datos del Dueño en los campos superiores
+                textBox1.Text = duenoexistente.Codigo;
+                textBox1.Enabled = false; // Bloqueamos la llave primaria del dueño
+
+                textBox2.Text = duenoexistente.Cedula;
+                textBox3.Text = duenoexistente.Nombre;
+                textBox4.Text = duenoexistente.Apellido;
+                comboBox1.SelectedItem = duenoexistente.Sexo.ToString();
+                textBox5.Text = duenoexistente.Edad.ToString();
+                dateTimePicker1.Value = duenoexistente.FechaNacimiento;
+                textBox6.Text = duenoexistente.Direccion;
+                textBox7.Text = duenoexistente.Telefono;
+                textBox8.Text = duenoexistente.Correo;
+
+                // Cambiar texto de los botones para guiar al usuario
+                button1.Text = "Actualizar Dueño";
+                button3.Text = "Guardar Cambios Modificados";
+
+                string nomCompleto = $"{duenoexistente.Nombre} {duenoexistente.Apellido}";
+
+                if (!comboBox3.Items.Contains(nomCompleto))
+                {
+                    comboBox3.Items.Add(nomCompleto);
+                }
+                comboBox3.SelectedItem = nomCompleto;
+                comboBox3.Enabled = false;
+
+                // 2. ¿Cómo cargar la sección de la Mascota? 
+                if (mascotaexistente != null)
+                {
+                    // Caso A: Si venimos desde frmAdminMascota, cargamos los datos de ESA mascota específica en los campos de edición directa
+                    textBox16.Text = mascotaexistente.Codigo_Mascota;
+                    textBox16.Enabled = false; // Bloqueamos la llave primaria de la mascota
+
+                    textBox15.Text = mascotaexistente.Nombre;
+                    comboBox2.SelectedItem = mascotaexistente.Especie.ToString();
+                    textBox13.Text = mascotaexistente.Raza;
+                    textBox12.Text = mascotaexistente.Edad.ToString();
+                    dateTimePicker2.Value = mascotaexistente.FechaNacimiento;
+
+                    listaMascotasTemporales.Clear();
+                    listBox1.Items.Clear();
+                    listaMascotasTemporales.Add(mascotaexistente);
+                    listBox1.Items.Add($"{mascotaexistente.Codigo_Mascota} - {mascotaexistente.Nombre} ({mascotaexistente.Especie})");
+                }
+                else
+                {
+                    listaMascotasTemporales.Clear();
+                    listBox1.Items.Clear();
+                    // Caso B: Si venimos desde frmAdminDueno, cargamos TODAS las mascotas que tiene ese dueño en el ListBox
+                    if (duenoexistente.Mascotas != null) 
+                    {
+                        foreach (Mascota m in duenoexistente.Mascotas)
+                        {
+                            listaMascotasTemporales.Add(m);
+                            listBox1.Items.Add($"{m.Codigo_Mascota} - {m.Nombre} ({m.Especie})");
+                        }
+                    }
+                }
+            }
         }
         public bool ValidarDatos()
         {
@@ -66,7 +145,7 @@ namespace Proyecto_Veterinaria.Formularios
             }
 
             // 3. Si hay dueños registrados, seleccionamos el último por defecto
-            if (comboBox3.Items.Count > 0)
+            if (duenoexistente == null && comboBox3.Items.Count > 0)
             {
                 comboBox3.SelectedIndex = comboBox3.Items.Count - 1;
             }
@@ -180,49 +259,90 @@ namespace Proyecto_Veterinaria.Formularios
         {
             try
             {
-                // 1. Validar que se haya seleccionado un dueño en el ComboBox
-                if (comboBox3.SelectedIndex < 0)
+                if(duenoexistente != null)
                 {
-                    MessageBox.Show("Debe seleccionar un dueño para la mascota.");
-                    return;
+                    int idxDueno = TListas.Lista_Duenos.FindIndex(d => d.Codigo == duenoexistente.Codigo);
+                    if(idxDueno != -1)
+                    {
+                        TListas.Lista_Duenos[idxDueno].Cedula = textBox2.Text.Trim();
+                        TListas.Lista_Duenos[idxDueno].Nombre = textBox3.Text.Trim();
+                        TListas.Lista_Duenos[idxDueno].Apellido = textBox4.Text.Trim();
+                        TListas.Lista_Duenos[idxDueno].Sexo = comboBox1.SelectedItem?.ToString();
+                        TListas.Lista_Duenos[idxDueno].Edad = string.IsNullOrWhiteSpace(textBox5.Text) ? 0 : int.Parse(textBox5.Text);
+                        TListas.Lista_Duenos[idxDueno].FechaNacimiento = dateTimePicker1.Value;
+                        TListas.Lista_Duenos[idxDueno].Direccion = textBox6.Text.Trim();
+                        TListas.Lista_Duenos[idxDueno].Telefono = textBox7.Text.Trim();
+                        TListas.Lista_Duenos[idxDueno].Correo = textBox8.Text.Trim();
+
+                        // Asignamos esta referencia limpia como el dueño seleccionado
+                        duenoSeleccionado = TListas.Lista_Duenos[idxDueno];
+
+                        // Reiniciamos la lista interna de mascotas de este dueño para actualizarla
+                        if (duenoSeleccionado.Mascotas != null)
+                        {
+                            duenoSeleccionado.Mascotas.Clear();
+                        }
+
+                    }
                 }
-                if (listaMascotasTemporales.Count == 0)
+                else
                 {
-                    MessageBox.Show("El ListBox está vacío. Agregue al menos una mascota antes de ingresar.");
-                    return;
+                    if (comboBox3.SelectedIndex < 0)
+                    {
+                        MessageBox.Show("Debe seleccionar un dueño para continuar.");
+                        return;
+                    }
+                    duenoSeleccionado = TListas.GetDueno(comboBox3.SelectedIndex);
+                }
+                // 2. ACTUALIZAR LA MASCOTA ACTIVA DE LAS CAJAS EN LA LISTA TEMPORAL (SI SE MODIFICÓ)
+                if (mascotaexistente != null && !string.IsNullOrWhiteSpace(textBox16.Text))
+                {
+                    int idxM = listaMascotasTemporales.FindIndex(m => m.Codigo_Mascota == mascotaexistente.Codigo_Mascota);
+                    if (idxM != -1)
+                    {
+                        listaMascotasTemporales[idxM].Nombre = textBox15.Text.Trim();
+                        listaMascotasTemporales[idxM].Especie = comboBox2.SelectedItem?.ToString();
+                        listaMascotasTemporales[idxM].Raza = textBox13.Text.Trim();
+                        listaMascotasTemporales[idxM].Edad = string.IsNullOrWhiteSpace(textBox12.Text) ? 0 : int.Parse(textBox12.Text);
+                        listaMascotasTemporales[idxM].FechaNacimiento = dateTimePicker2.Value;
+                    }
                 }
 
-                // 2. Recuperar el objeto Dueño real usando la misma posición del ComboBox
-                duenoSeleccionado = TListas.GetDueno(comboBox3.SelectedIndex);
-
+                // 3. GUARDAR TODO EN LAS LISTAS GLOBALES DE LA APLICACIÓN (TListas)
                 foreach (Mascota mascotaTemp in listaMascotasTemporales)
                 {
-                    // Asignamos el dueño real que estaba pendiente
+                    // Enlazamos al dueño correcto actualizado
                     mascotaTemp.Dueno = duenoSeleccionado;
-
-                    // Vinculación bidireccional en las listas del objeto
                     duenoSeleccionado.agregarMascota(mascotaTemp);
 
-                    // Insertar en la lista global estática para el DataGridView
-                    if (!TListas.Lista_Mascotas.Any(m => m.Codigo_Mascota == mascotaTemp.Codigo_Mascota))
+                    // Buscamos si la mascota ya existe en la lista de la veterinaria
+                    int idxMascotaGlobal = TListas.Lista_Mascotas.FindIndex(m => m.Codigo_Mascota == mascotaTemp.Codigo_Mascota);
+
+                    if (idxMascotaGlobal != -1)
                     {
+                        // Si ya existía, reemplazamos con sus datos nuevos modificados
+                        TListas.Lista_Mascotas[idxMascotaGlobal] = mascotaTemp;
+                    }
+                    else
+                    {
+                        // Si es una mascota nueva añadida en esta edición, la insertamos
                         TListas.InsertMascota(mascotaTemp);
                     }
                 }
 
-                MessageBox.Show($"Se han registrado exitosamente {listaMascotasTemporales.Count} mascota(s).");
+                MessageBox.Show("¡Todos los cambios han sido modificados y guardados con éxito!", "Éxito");
 
-                // Limpiar contenedores temporales
+                // Limpieza de memoria temporal
                 listaMascotasTemporales.Clear();
                 listBox1.Items.Clear();
 
-                // Cerramos con éxito
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar mascota: " + ex.Message);
+                MessageBox.Show("Error al procesar el guardado definitivo: " + ex.Message);
             }
         }
 
@@ -246,20 +366,29 @@ namespace Proyecto_Veterinaria.Formularios
                 DateTime fechanacMascota = dateTimePicker2.Value;
 
                 // 3. Crear el objeto temporal (el dueño se enlazará al presionar el botón Ingresar definitivo)
-                Mascota temporal = new Mascota(codMascota, nomMascota, especieMascota, razaMascota, fechanacMascota, edadMascota, null);
+                Mascota temporal = new Mascota(codMascota, nomMascota, especieMascota, razaMascota, fechanacMascota, edadMascota, duenoexistente);
 
-                // 4. Agregar a nuestra lista de control temporal
-                listaMascotasTemporales.Add(temporal);
+                int indxTemp = listaMascotasTemporales.FindIndex(m => m.Codigo_Mascota == temporal.Codigo_Mascota);
 
-                // 5. Mostrar en el ListBox (usamos un formato legible)
-                listBox1.Items.Add($"{temporal.Codigo_Mascota} - {temporal.Nombre} ({temporal.Especie})");
+                if (indxTemp != -1)
+                {
+                    listaMascotasTemporales[indxTemp] = temporal; // Reemplazamos el objeto temporal existente con el nuevo objeto modificado
+                }
+                else
+                {
+                    listaMascotasTemporales.Add(temporal); // Agregamos el nuevo objeto temporal a la lista
+                }
 
-                // 6. Limpiar los campos de la mascota para poder ingresar otra fácilmente
+                listBox1.Items.Clear();
+                foreach (Mascota m in listaMascotasTemporales)
+                {
+                    listBox1.Items.Add($"{m.Codigo_Mascota} - {m.Nombre} ({m.Especie})");
+                }
                 LimpiarCamposMascota();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar mascota a la lista: " + ex.Message);
+                MessageBox.Show("Error al procesar la mascota en la lista: " + ex.Message);
             }
         }
         private void LimpiarCamposMascota()

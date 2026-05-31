@@ -95,5 +95,26 @@ namespace Proyecto_Veterinaria
         {
             Eliminar();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un dueño de la lista.");
+                return;
+            }
+
+            string cedulaSeleccionada = dataGridView1.CurrentRow.Cells["Cedula"].Value.ToString();
+            Dueno duenoAEditar = TListas.Lista_Duenos.FirstOrDefault(m => m.Cedula == cedulaSeleccionada);
+
+            if (duenoAEditar != null)
+            {
+                frmEditDueno_Mascota frmEditar = new frmEditDueno_Mascota(duenoAEditar);
+                if (frmEditar.ShowDialog() == DialogResult.OK)
+                {
+                    MostrarDatos();
+                }
+            }
+        }
     }
 }

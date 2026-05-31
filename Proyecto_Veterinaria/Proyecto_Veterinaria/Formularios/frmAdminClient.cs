@@ -60,29 +60,39 @@ namespace Proyecto_Veterinaria
 
         public void Eliminar()
         {
-            try
+            if (dataGridView1.CurrentRow == null)
             {
-                if (dataGridView1.CurrentRow != null)
-                {
-                    var res = MessageBox.Show("¿Desea eliminar al dueño seleccionado? Esto también borrará sus mascotas.", "Eliminar Dueño", MessageBoxButtons.YesNo);
-                    if (res == DialogResult.Yes)
-                    {
-                        Dueno obj = dataGridView1.CurrentRow.DataBoundItem as Dueno;
-                        int pos = TListas.Buscar(obj.Codigo);
-                        TListas.Delete(pos);
-
-                        MessageBox.Show("Dueño y sus mascotas eliminados correctamente");
-                        MostrarDatos();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Seleccione la fila a Eliminar.");
-                }
+                MessageBox.Show("Seleccione un dueño para eliminar.");
+                return;
             }
-            catch (Exception ex)
+
+            // 1. Obtener el código o cédula del dueño seleccionado en la tabla
+            string codigoDueno = dataGridView1.CurrentRow.Cells["Codigo"].Value.ToString();
+
+            // 2. Buscar el objeto Dueño real en tu lista estática
+            Dueno duenoAEliminar = TListas.Lista_Duenos.FirstOrDefault(d => d.Codigo == codigoDueno);
+
+            if (duenoAEliminar != null)
             {
-                MessageBox.Show("Error al eliminar: " + ex.Message);
+                var confirmacion = MessageBox.Show($"¿Está seguro de eliminar a {duenoAEliminar.Nombre}? También se eliminarán todas sus mascotas asociadas.", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (confirmacion == DialogResult.Yes)
+                {
+                    // =========================================================================
+                    // ¡AQUÍ ESTÁ EL TRUCO! - ELIMINACIÓN EN CASCADA
+                    // =========================================================================
+
+                    // Usamos LINQ para remover de la lista GLOBAL de mascotas todas aquellas 
+                    // cuyo dueño coincida con el código del dueño que vamos a borrar.
+                    TListas.Lista_Mascotas.RemoveAll(m => m.Dueno != null && m.Dueno.Codigo == codigoDueno);
+
+                    // Ahora sí, eliminamos al dueño de la lista GLOBAL de dueños
+                    TListas.Lista_Duenos.Remove(duenoAEliminar);
+
+                    // 3. Refrescar la tabla actual
+                    MostrarDatos();
+                    MessageBox.Show("Dueño y sus mascotas eliminados correctamente.");
+                }
             }
         }
 

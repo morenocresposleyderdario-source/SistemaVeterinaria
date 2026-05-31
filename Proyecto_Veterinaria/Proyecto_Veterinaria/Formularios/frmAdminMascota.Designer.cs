@@ -54,6 +54,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Insertar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -72,6 +73,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Eliminar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -95,6 +97,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmAdminMascota";
             this.Text = "frmAdminMascota";
+            this.Load += new System.EventHandler(this.frmAdminMascota_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

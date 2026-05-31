@@ -22,17 +22,7 @@ namespace Proyecto_Veterinaria
 
         private void frmAdminClient_Load(object sender, EventArgs e)
         {
-            DatosPrueba();
             MostrarDatos();
-        }
-        public void DatosPrueba()
-        {
-            // Evitamos duplicar datos de prueba si el formulario se vuelve a cargar
-            if (TListas.Lista_Duenos.Count == 0)
-            {
-                TListas.Insert(new Dueno("D01", "0701234567", "Carlos", "Pérez", "Masculino", 34, new DateTime(1992, 05, 12), "Av. Central", "0999999999", "carlos@mail.com"));
-                TListas.Insert(new Dueno("D02", "0707654321", "Ana", "Gómez", "Femenino", 28, new DateTime(1998, 11, 23), "Calle Loja", "0988888888", "ana@mail.com"));
-            }
         }
 
         public void MostrarDatos()

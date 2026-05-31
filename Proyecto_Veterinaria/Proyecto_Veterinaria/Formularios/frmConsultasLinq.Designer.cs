@@ -34,12 +34,10 @@
             this.mascotasOrdenadasAlfabeticamenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listarMascotasPerroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cantidadMascotasPorEspecieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mascotaYDueñoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.promedioDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pacientesConFiebreAltaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicosOrdenadosAlfabeticamentePoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atencionesClinicasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultaFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,6 +45,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -69,12 +69,10 @@
             this.mascotasOrdenadasAlfabeticamenteToolStripMenuItem,
             this.listarMascotasPerroToolStripMenuItem,
             this.cantidadMascotasPorEspecieToolStripMenuItem,
-            this.mascotaYDueñoToolStripMenuItem,
             this.promedioDeToolStripMenuItem,
             this.pacientesConFiebreAltaToolStripMenuItem,
             this.medicosOrdenadosAlfabeticamentePoToolStripMenuItem,
-            this.atencionesClinicasToolStripMenuItem,
-            this.consultaFechaToolStripMenuItem});
+            this.atencionesClinicasToolStripMenuItem});
             this.linqToVarToolStripMenuItem.Name = "linqToVarToolStripMenuItem";
             this.linqToVarToolStripMenuItem.Size = new System.Drawing.Size(93, 24);
             this.linqToVarToolStripMenuItem.Text = "Linq to var";
@@ -107,13 +105,6 @@
             this.cantidadMascotasPorEspecieToolStripMenuItem.Text = "Cantidad Mascotas por Especie";
             this.cantidadMascotasPorEspecieToolStripMenuItem.Click += new System.EventHandler(this.cantidadMascotasPorEspecieToolStripMenuItem_Click);
             // 
-            // mascotaYDueñoToolStripMenuItem
-            // 
-            this.mascotaYDueñoToolStripMenuItem.Name = "mascotaYDueñoToolStripMenuItem";
-            this.mascotaYDueñoToolStripMenuItem.Size = new System.Drawing.Size(427, 26);
-            this.mascotaYDueñoToolStripMenuItem.Text = "Mascota y Dueño";
-            this.mascotaYDueñoToolStripMenuItem.Click += new System.EventHandler(this.mascotaYDueñoToolStripMenuItem_Click);
-            // 
             // promedioDeToolStripMenuItem
             // 
             this.promedioDeToolStripMenuItem.Name = "promedioDeToolStripMenuItem";
@@ -142,13 +133,6 @@
             this.atencionesClinicasToolStripMenuItem.Text = "Atenciones Clinicas";
             this.atencionesClinicasToolStripMenuItem.Click += new System.EventHandler(this.atencionesClinicasToolStripMenuItem_Click);
             // 
-            // consultaFechaToolStripMenuItem
-            // 
-            this.consultaFechaToolStripMenuItem.Name = "consultaFechaToolStripMenuItem";
-            this.consultaFechaToolStripMenuItem.Size = new System.Drawing.Size(427, 26);
-            this.consultaFechaToolStripMenuItem.Text = "Consulta Fecha";
-            this.consultaFechaToolStripMenuItem.Click += new System.EventHandler(this.consultaFechaToolStripMenuItem_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -163,7 +147,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(120, 96);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(162, 22);
+            this.textBox1.Size = new System.Drawing.Size(118, 22);
             this.textBox1.TabIndex = 2;
             // 
             // label1
@@ -188,7 +172,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(422, 96);
+            this.label3.Location = new System.Drawing.Point(372, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 16);
             this.label3.TabIndex = 5;
@@ -196,9 +180,10 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(541, 94);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(491, 97);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(139, 22);
             this.dateTimePicker1.TabIndex = 6;
             // 
             // label4
@@ -206,15 +191,37 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(58, 380);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(10, 16);
+            this.label4.Size = new System.Drawing.Size(44, 16);
             this.label4.TabIndex = 7;
-            this.label4.Text = "l";
+            this.label4.Text = "label4";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(267, 96);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Buscar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(666, 95);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Buscar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // frmConsultasLinq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label3);
@@ -243,12 +250,10 @@
         private System.Windows.Forms.ToolStripMenuItem mascotasOrdenadasAlfabeticamenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listarMascotasPerroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cantidadMascotasPorEspecieToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mascotaYDueñoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem promedioDeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pacientesConFiebreAltaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem medicosOrdenadosAlfabeticamentePoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem atencionesClinicasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consultaFechaToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
@@ -256,5 +261,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

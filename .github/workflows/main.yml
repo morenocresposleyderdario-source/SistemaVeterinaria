@@ -18,7 +18,7 @@ jobs:
       uses: NuGet/setup-nuget@v2
 
     - name: Configurar MSBuild
-      uses: microsoft/setup-msbuild@v2
+      uses: microsoft/setup-msbuild@v3
 
     - name: Restaurar paquetes NuGet
       run: nuget restore Proyecto_Veterinaria/Proyecto_Veterinaria.slnx

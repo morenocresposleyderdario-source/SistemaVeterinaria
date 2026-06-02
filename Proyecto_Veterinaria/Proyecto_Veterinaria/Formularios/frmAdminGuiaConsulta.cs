@@ -23,5 +23,10 @@ namespace Proyecto_Veterinaria.Formularios
             dataGridView1.DataSource = null;
             dataGridView1.DataSource = TListas.Lista_GuiaConsulta.ToList();
         }
+
+        private void frmAdminGuiaConsulta_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
